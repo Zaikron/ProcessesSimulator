@@ -10,22 +10,35 @@ namespace ProcesessSimulator.Utilities
         public string operation;
         public int n1;
         public int n2;
-        public float result;
+        public float result = 999.999f;
         public int numLote = 0;
+        public bool isError = false;
         public bool executed = false;
         public bool added = false;
         public int elapsedTme = 0;
         public int blockTime = 0;
+        public string state = "NUEVO";
 
         /*Tiempos*/
-        public int maxTime = 0;
-        public int TLlegada = 0;
-        public int TFinal = 0;
-        public int TRetorno = 0;
-        public int TRespuesta = 0;
+        public int maxTime = -1;
+        public int TLlegada = -1;
+        private bool indicatorTLlegada = false;
+        public int TFinal = -1;
+        public int TRetorno = -1;
+        public int TRespuesta = -1;
         private bool indicatorTRespuesta = false;
-        public int TEspera = 0;
-        public int TServicio = 0;
+        public int TEspera = -1;
+        public int TServicio = -1;
+
+        /*
+         if (p.maxTime == -1) { row.Cells[4].Value = "null"; } else { row.Cells[4].Value = p.maxTime; }
+            if (p.TLlegada == -1) { row.Cells[5].Value = "null"; } else { row.Cells[5].Value = p.TLlegada; }
+            if (p.TFinal == -1) { row.Cells[6].Value = "null"; } else { row.Cells[6].Value = p.TFinal; }
+            if (p.TRetorno == -1) { row.Cells[7].Value = "null"; } else { row.Cells[7].Value = p.TRetorno; }
+            if (p.TRespuesta == -1) { row.Cells[8].Value = "null"; } else { row.Cells[8].Value = p.TRespuesta; }
+            if (p.TEspera == -1) { row.Cells[9].Value = "null"; } else { row.Cells[9].Value = p.TEspera; }
+            if (p.TServicio == -1) { row.Cells[10].Value = "null"; } else { row.Cells[10].Value = p.TServicio; }
+         */
 
 
         public _Process(String name, int id, int maxT, String op, int n1, int n2)
@@ -37,7 +50,7 @@ namespace ProcesessSimulator.Utilities
             this.n1 = n1;
             this.n2 = n2;
 
-            setOperation();
+            //setOperation();
         }
 
         public void setOperation()
@@ -89,10 +102,47 @@ namespace ProcesessSimulator.Utilities
             return "NULL";
         }
 
+        public void calculeTimers(int global)
+        {
+            if (state == "NUEVO")
+            {
+                
+            }
+            else if (state == "LISTO")
+            {
+                setTLlegada(global);
+                setTServicio();
+                TEspera = global - TLlegada - TServicio;
+            }
+            else if (state == "EJECUCION")
+            {
+                setTRespuesta(global);
+                setTServicio();
+                TEspera = global - TLlegada - TServicio;
+            }
+            else if (state == "BLOQUEADO")
+            {
+                setTServicio();
+                TEspera = global - TLlegada - TServicio;
+            }
+            else if (state == "TERMINADO")
+            {
+                setTFinal(global);
+                setTRetorno();
+                setTServicio();
+                setTEspera();
+            }
+
+        }
+
         /*      Tiempos     */
         public void setTLlegada(int time) // Cuando entra listos
         {
-            TLlegada = time;
+            if (indicatorTLlegada == false)
+            {
+                TLlegada = time;
+                indicatorTLlegada = true;
+            }
         }
 
         public void setTFinal(int time) // Cuando entra a terminados
@@ -121,6 +171,15 @@ namespace ProcesessSimulator.Utilities
         public void setTEspera() // Cuando entra a terminados
         {
             TEspera = TRetorno - TServicio;
+        }
+
+        public void setTEsperaBCP(int global) // Cuando entra a terminados
+        {
+            if (state == "LISTO" || state == "EJECUCION" || state == "BLOQUEADO")
+            {
+                setTServicio();
+                TEspera = global - TLlegada - TServicio;
+            }
         }
         /*****************/
         public void setNumLote(int lote)

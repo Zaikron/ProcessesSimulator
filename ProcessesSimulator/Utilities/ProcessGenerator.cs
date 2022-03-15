@@ -28,6 +28,16 @@ namespace ProcesessSimulator.Utilities
             return processes;
         }
 
+        public _Process generateProcess()
+        {
+            _Process p;
+            p = new _Process("Anthony Sandoval", generateID(), generateTime(),
+                        generateOperation(), generateNum1(), generateNum2());
+            p.setNumLote(getNumLote());
+
+            return p;
+        }
+
         private int generateID()
         {
             actualID++;

@@ -31,8 +31,12 @@ namespace Compilador
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tableNews = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label2 = new System.Windows.Forms.Label();
             this.textNuevos = new System.Windows.Forms.Label();
-            this.cBoxProcesess = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tableWorking = new System.Windows.Forms.DataGridView();
@@ -63,26 +67,9 @@ namespace Compilador
             this.label11 = new System.Windows.Forms.Label();
             this.textTExecuted = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.tabOutputs = new System.Windows.Forms.TabControl();
-            this.tabCapture = new System.Windows.Forms.TabPage();
-            this.textProcesses = new System.Windows.Forms.Label();
-            this.textWarnings = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.fieldName = new System.Windows.Forms.TextBox();
-            this.fieldID = new System.Windows.Forms.TextBox();
-            this.fieldTime = new System.Windows.Forms.TextBox();
-            this.fieldNum1 = new System.Windows.Forms.TextBox();
-            this.fieldNum2 = new System.Windows.Forms.TextBox();
-            this.cBoxOperation = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.tabComplete = new System.Windows.Forms.TabPage();
+            this.timerProcesess = new System.Windows.Forms.Timer(this.components);
+            this.timerLot = new System.Windows.Forms.Timer(this.components);
+            this.timerBlock = new System.Windows.Forms.Timer(this.components);
             this.tableBlock = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -90,6 +77,10 @@ namespace Compilador
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.blockedT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label22 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.tabOutputs = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.cBoxProcesess = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.tableComplete = new System.Windows.Forms.DataGridView();
             this.idComplete = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -102,57 +93,102 @@ namespace Compilador
             this.TRES = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.timerProcesess = new System.Windows.Forms.Timer(this.components);
-            this.timerLot = new System.Windows.Forms.Timer(this.components);
-            this.timerBlock = new System.Windows.Forms.Timer(this.components);
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tableBCP = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.state = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tableNews)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tableWorking)).BeginInit();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tabOutputs.SuspendLayout();
-            this.tabCapture.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tabComplete.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableBlock)).BeginInit();
+            this.panel4.SuspendLayout();
+            this.tabOutputs.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableComplete)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tableBCP)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.tableNews);
+            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.textNuevos);
-            this.panel1.Controls.Add(this.cBoxProcesess);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.tableWorking);
             this.panel1.Location = new System.Drawing.Point(614, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(381, 269);
+            this.panel1.Size = new System.Drawing.Size(381, 333);
             this.panel1.TabIndex = 0;
+            // 
+            // tableNews
+            // 
+            this.tableNews.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.tableNews.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.tableNews.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tableNews.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn8});
+            this.tableNews.Location = new System.Drawing.Point(6, 24);
+            this.tableNews.Name = "tableNews";
+            this.tableNews.RowTemplate.Height = 25;
+            this.tableNews.Size = new System.Drawing.Size(370, 130);
+            this.tableNews.TabIndex = 9;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "T Max";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = "Operacion ";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.label2.Location = new System.Drawing.Point(6, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(49, 15);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Nuevos";
             // 
             // textNuevos
             // 
             this.textNuevos.AutoSize = true;
-            this.textNuevos.Location = new System.Drawing.Point(111, 252);
+            this.textNuevos.Location = new System.Drawing.Point(363, 9);
             this.textNuevos.Name = "textNuevos";
             this.textNuevos.Size = new System.Drawing.Size(13, 15);
             this.textNuevos.TabIndex = 7;
             this.textNuevos.Text = "0";
             // 
-            // cBoxProcesess
-            // 
-            this.cBoxProcesess.FormattingEnabled = true;
-            this.cBoxProcesess.Location = new System.Drawing.Point(161, 6);
-            this.cBoxProcesess.Name = "cBoxProcesess";
-            this.cBoxProcesess.Size = new System.Drawing.Size(215, 23);
-            this.cBoxProcesess.TabIndex = 4;
-            this.cBoxProcesess.Text = "Nuevos:";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(3, 252);
+            this.label3.Location = new System.Drawing.Point(260, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(107, 15);
             this.label3.TabIndex = 2;
@@ -163,7 +199,7 @@ namespace Compilador
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.label1.Location = new System.Drawing.Point(6, 14);
+            this.label1.Location = new System.Drawing.Point(6, 157);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 15);
             this.label1.TabIndex = 1;
@@ -179,10 +215,10 @@ namespace Compilador
             this.timeWorking,
             this.TTWorking,
             this.operationWorking});
-            this.tableWorking.Location = new System.Drawing.Point(3, 32);
+            this.tableWorking.Location = new System.Drawing.Point(6, 175);
             this.tableWorking.Name = "tableWorking";
             this.tableWorking.RowTemplate.Height = 25;
-            this.tableWorking.Size = new System.Drawing.Size(373, 217);
+            this.tableWorking.Size = new System.Drawing.Size(370, 153);
             this.tableWorking.TabIndex = 0;
             this.tableWorking.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -228,9 +264,9 @@ namespace Compilador
             this.panel2.Controls.Add(this.tableLayoutPanel2);
             this.panel2.Controls.Add(this.label10);
             this.panel2.Controls.Add(this.btnIni);
-            this.panel2.Location = new System.Drawing.Point(614, 288);
+            this.panel2.Location = new System.Drawing.Point(614, 353);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(381, 200);
+            this.panel2.Size = new System.Drawing.Size(388, 200);
             this.panel2.TabIndex = 2;
             // 
             // textKey
@@ -448,228 +484,20 @@ namespace Compilador
             this.label10.TabIndex = 2;
             this.label10.Text = "Ejecucion";
             // 
-            // tabOutputs
+            // timerProcesess
             // 
-            this.tabOutputs.Controls.Add(this.tabCapture);
-            this.tabOutputs.Controls.Add(this.tabComplete);
-            this.tabOutputs.Location = new System.Drawing.Point(13, 13);
-            this.tabOutputs.Name = "tabOutputs";
-            this.tabOutputs.SelectedIndex = 0;
-            this.tabOutputs.Size = new System.Drawing.Size(595, 475);
-            this.tabOutputs.TabIndex = 3;
+            this.timerProcesess.Interval = 500;
+            this.timerProcesess.Tick += new System.EventHandler(this.timerProcesess_Tick);
             // 
-            // tabCapture
+            // timerLot
             // 
-            this.tabCapture.Controls.Add(this.textProcesses);
-            this.tabCapture.Controls.Add(this.textWarnings);
-            this.tabCapture.Controls.Add(this.label18);
-            this.tabCapture.Controls.Add(this.tableLayoutPanel1);
-            this.tabCapture.Controls.Add(this.btnAdd);
-            this.tabCapture.Location = new System.Drawing.Point(4, 24);
-            this.tabCapture.Name = "tabCapture";
-            this.tabCapture.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCapture.Size = new System.Drawing.Size(587, 447);
-            this.tabCapture.TabIndex = 0;
-            this.tabCapture.Text = "Captura";
-            this.tabCapture.UseVisualStyleBackColor = true;
+            this.timerLot.Interval = 10;
+            this.timerLot.Tick += new System.EventHandler(this.timerLot_Tick);
             // 
-            // textProcesses
+            // timerBlock
             // 
-            this.textProcesses.AutoSize = true;
-            this.textProcesses.Location = new System.Drawing.Point(172, 267);
-            this.textProcesses.Name = "textProcesses";
-            this.textProcesses.Size = new System.Drawing.Size(13, 15);
-            this.textProcesses.TabIndex = 6;
-            this.textProcesses.Text = "0";
-            // 
-            // textWarnings
-            // 
-            this.textWarnings.Location = new System.Drawing.Point(6, 345);
-            this.textWarnings.Multiline = true;
-            this.textWarnings.Name = "textWarnings";
-            this.textWarnings.Size = new System.Drawing.Size(470, 95);
-            this.textWarnings.TabIndex = 9;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label18.Location = new System.Drawing.Point(45, 267);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(121, 15);
-            this.label18.TabIndex = 5;
-            this.label18.Text = "Procesos ingresados:";
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 186F));
-            this.tableLayoutPanel1.Controls.Add(this.label8, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label6, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.fieldName, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.fieldID, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.fieldTime, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.fieldNum1, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.fieldNum2, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.cBoxOperation, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(45, 24);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 6;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(381, 233);
-            this.tableLayoutPanel1.TabIndex = 8;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label8.Location = new System.Drawing.Point(3, 190);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(189, 43);
-            this.label8.TabIndex = 6;
-            this.label8.Text = "Segundo Numero";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(3, 38);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(189, 38);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Numero de Programa(ID)";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Location = new System.Drawing.Point(3, 152);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(189, 38);
-            this.label7.TabIndex = 5;
-            this.label7.Text = "Primer Numero";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Location = new System.Drawing.Point(3, 76);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(189, 38);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "Tiempo Maximo Esperado";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Location = new System.Drawing.Point(3, 114);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(189, 38);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "Operacion";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // fieldName
-            // 
-            this.fieldName.Location = new System.Drawing.Point(198, 3);
-            this.fieldName.Name = "fieldName";
-            this.fieldName.Size = new System.Drawing.Size(180, 23);
-            this.fieldName.TabIndex = 7;
-            // 
-            // fieldID
-            // 
-            this.fieldID.Location = new System.Drawing.Point(198, 41);
-            this.fieldID.Name = "fieldID";
-            this.fieldID.Size = new System.Drawing.Size(180, 23);
-            this.fieldID.TabIndex = 9;
-            // 
-            // fieldTime
-            // 
-            this.fieldTime.Location = new System.Drawing.Point(198, 79);
-            this.fieldTime.Name = "fieldTime";
-            this.fieldTime.Size = new System.Drawing.Size(180, 23);
-            this.fieldTime.TabIndex = 10;
-            // 
-            // fieldNum1
-            // 
-            this.fieldNum1.Location = new System.Drawing.Point(198, 155);
-            this.fieldNum1.Name = "fieldNum1";
-            this.fieldNum1.Size = new System.Drawing.Size(180, 23);
-            this.fieldNum1.TabIndex = 11;
-            // 
-            // fieldNum2
-            // 
-            this.fieldNum2.Location = new System.Drawing.Point(198, 193);
-            this.fieldNum2.Name = "fieldNum2";
-            this.fieldNum2.Size = new System.Drawing.Size(180, 23);
-            this.fieldNum2.TabIndex = 12;
-            // 
-            // cBoxOperation
-            // 
-            this.cBoxOperation.FormattingEnabled = true;
-            this.cBoxOperation.Items.AddRange(new object[] {
-            "Suma",
-            "Resta",
-            "Multiplicacion",
-            "Division",
-            "Residuo"});
-            this.cBoxOperation.Location = new System.Drawing.Point(198, 117);
-            this.cBoxOperation.Name = "cBoxOperation";
-            this.cBoxOperation.Size = new System.Drawing.Size(180, 23);
-            this.cBoxOperation.TabIndex = 13;
-            this.cBoxOperation.Tag = "";
-            this.cBoxOperation.Text = "Suma";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(3, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(189, 38);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Nombre del Programador";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(315, 263);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(108, 23);
-            this.btnAdd.TabIndex = 7;
-            this.btnAdd.Text = "Agregar";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // tabComplete
-            // 
-            this.tabComplete.Controls.Add(this.tableBlock);
-            this.tabComplete.Controls.Add(this.label22);
-            this.tabComplete.Controls.Add(this.label9);
-            this.tabComplete.Controls.Add(this.tableComplete);
-            this.tabComplete.Location = new System.Drawing.Point(4, 24);
-            this.tabComplete.Name = "tabComplete";
-            this.tabComplete.Padding = new System.Windows.Forms.Padding(3);
-            this.tabComplete.Size = new System.Drawing.Size(587, 447);
-            this.tabComplete.TabIndex = 1;
-            this.tabComplete.Text = "Salida";
-            this.tabComplete.UseVisualStyleBackColor = true;
+            this.timerBlock.Interval = 500;
+            this.timerBlock.Tick += new System.EventHandler(this.timeBlock_Tick);
             // 
             // tableBlock
             // 
@@ -682,10 +510,10 @@ namespace Compilador
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
             this.blockedT});
-            this.tableBlock.Location = new System.Drawing.Point(6, 292);
+            this.tableBlock.Location = new System.Drawing.Point(3, 29);
             this.tableBlock.Name = "tableBlock";
             this.tableBlock.RowTemplate.Height = 25;
-            this.tableBlock.Size = new System.Drawing.Size(575, 148);
+            this.tableBlock.Size = new System.Drawing.Size(589, 167);
             this.tableBlock.TabIndex = 3;
             // 
             // dataGridViewTextBoxColumn1
@@ -718,18 +546,60 @@ namespace Compilador
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label22.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.label22.Location = new System.Drawing.Point(6, 274);
+            this.label22.Location = new System.Drawing.Point(3, 11);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(66, 15);
             this.label22.TabIndex = 2;
             this.label22.Text = "Bloqueado";
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.tableBlock);
+            this.panel4.Controls.Add(this.label22);
+            this.panel4.Location = new System.Drawing.Point(12, 351);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(596, 202);
+            this.panel4.TabIndex = 5;
+            // 
+            // tabOutputs
+            // 
+            this.tabOutputs.Controls.Add(this.tabPage1);
+            this.tabOutputs.Controls.Add(this.tabPage2);
+            this.tabOutputs.Location = new System.Drawing.Point(12, 12);
+            this.tabOutputs.Name = "tabOutputs";
+            this.tabOutputs.SelectedIndex = 0;
+            this.tabOutputs.Size = new System.Drawing.Size(596, 333);
+            this.tabOutputs.TabIndex = 6;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.cBoxProcesess);
+            this.tabPage1.Controls.Add(this.label9);
+            this.tabPage1.Controls.Add(this.tableComplete);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(588, 305);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Terminados";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // cBoxProcesess
+            // 
+            this.cBoxProcesess.FormattingEnabled = true;
+            this.cBoxProcesess.Location = new System.Drawing.Point(367, 3);
+            this.cBoxProcesess.Name = "cBoxProcesess";
+            this.cBoxProcesess.Size = new System.Drawing.Size(215, 23);
+            this.cBoxProcesess.TabIndex = 4;
+            this.cBoxProcesess.Text = "Nuevos:";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label9.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.label9.Location = new System.Drawing.Point(6, 14);
+            this.label9.Location = new System.Drawing.Point(6, 9);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(66, 15);
             this.label9.TabIndex = 1;
@@ -751,10 +621,10 @@ namespace Compilador
             this.TRES,
             this.TE,
             this.TS});
-            this.tableComplete.Location = new System.Drawing.Point(6, 32);
+            this.tableComplete.Location = new System.Drawing.Point(6, 27);
             this.tableComplete.Name = "tableComplete";
             this.tableComplete.RowTemplate.Height = 25;
-            this.tableComplete.Size = new System.Drawing.Size(575, 228);
+            this.tableComplete.Size = new System.Drawing.Size(576, 272);
             this.tableComplete.TabIndex = 0;
             // 
             // idComplete
@@ -807,48 +677,125 @@ namespace Compilador
             this.TS.HeaderText = "TS";
             this.TS.Name = "TS";
             // 
-            // timerProcesess
+            // tabPage2
             // 
-            this.timerProcesess.Interval = 500;
-            this.timerProcesess.Tick += new System.EventHandler(this.timerProcesess_Tick);
+            this.tabPage2.Controls.Add(this.tableBCP);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(588, 305);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "BCP";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // timerLot
+            // tableBCP
             // 
-            this.timerLot.Interval = 10;
-            this.timerLot.Tick += new System.EventHandler(this.timerLot_Tick);
+            this.tableBCP.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.tableBCP.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.tableBCP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tableBCP.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn9,
+            this.dataGridViewTextBoxColumn10,
+            this.state,
+            this.dataGridViewTextBoxColumn11,
+            this.dataGridViewTextBoxColumn12,
+            this.dataGridViewTextBoxColumn13,
+            this.dataGridViewTextBoxColumn14,
+            this.dataGridViewTextBoxColumn15,
+            this.dataGridViewTextBoxColumn16,
+            this.dataGridViewTextBoxColumn17});
+            this.tableBCP.Location = new System.Drawing.Point(6, 16);
+            this.tableBCP.Name = "tableBCP";
+            this.tableBCP.RowTemplate.Height = 25;
+            this.tableBCP.Size = new System.Drawing.Size(576, 283);
+            this.tableBCP.TabIndex = 1;
             // 
-            // timerBlock
+            // dataGridViewTextBoxColumn7
             // 
-            this.timerBlock.Interval = 500;
-            this.timerBlock.Tick += new System.EventHandler(this.timeBlock_Tick);
+            this.dataGridViewTextBoxColumn7.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.HeaderText = "Op";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.HeaderText = "Res";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            // 
+            // state
+            // 
+            this.state.HeaderText = "Estado";
+            this.state.Name = "state";
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.HeaderText = "TME";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.HeaderText = "TLL";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.HeaderText = "TF";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.HeaderText = "TRET";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.HeaderText = "TRES";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.HeaderText = "TE";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            this.dataGridViewTextBoxColumn17.HeaderText = "TS";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
             // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1007, 500);
+            this.ClientSize = new System.Drawing.Size(1007, 565);
             this.Controls.Add(this.tabOutputs);
+            this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Principal";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Click += new System.EventHandler(this.Principal_Click);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tableNews)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tableWorking)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.tabOutputs.ResumeLayout(false);
-            this.tabCapture.ResumeLayout(false);
-            this.tabCapture.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.tabComplete.ResumeLayout(false);
-            this.tabComplete.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableBlock)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.tabOutputs.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableComplete)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tableBCP)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -860,25 +807,6 @@ namespace Compilador
         private System.Windows.Forms.Button btnIni;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TabControl tabOutputs;
-        private System.Windows.Forms.TabPage tabCapture;
-        private System.Windows.Forms.TabPage tabComplete;
-        private System.Windows.Forms.DataGridView tableComplete;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TextBox fieldName;
-        private System.Windows.Forms.TextBox fieldID;
-        private System.Windows.Forms.TextBox fieldTime;
-        private System.Windows.Forms.TextBox fieldNum1;
-        private System.Windows.Forms.TextBox fieldNum2;
-        private System.Windows.Forms.ComboBox cBoxOperation;
-        private System.Windows.Forms.TextBox textWarnings;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
@@ -891,13 +819,9 @@ namespace Compilador
         private System.Windows.Forms.Label textTTrans;
         private System.Windows.Forms.Label textTRes;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label textAcum;
-        private System.Windows.Forms.Label textProcesses;
-        private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cBoxProcesess;
         private System.Windows.Forms.Timer timerProcesess;
         private System.Windows.Forms.Timer timerLot;
         private System.Windows.Forms.DataGridViewTextBoxColumn idWorking;
@@ -911,15 +835,26 @@ namespace Compilador
         private System.Windows.Forms.Button btnAddAll;
         private System.Windows.Forms.Label textKey;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Timer timerBlock;
+        private System.Windows.Forms.Label textNuevos;
         private System.Windows.Forms.DataGridView tableBlock;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.Timer timerBlock;
         private System.Windows.Forms.DataGridViewTextBoxColumn blockedT;
-        private System.Windows.Forms.Label textNuevos;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView tableNews;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.TabControl tabOutputs;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.ComboBox cBoxProcesess;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DataGridView tableComplete;
         private System.Windows.Forms.DataGridViewTextBoxColumn idComplete;
         private System.Windows.Forms.DataGridViewTextBoxColumn operationComplete;
         private System.Windows.Forms.DataGridViewTextBoxColumn resultComplete;
@@ -930,6 +865,19 @@ namespace Compilador
         private System.Windows.Forms.DataGridViewTextBoxColumn TRES;
         private System.Windows.Forms.DataGridViewTextBoxColumn TE;
         private System.Windows.Forms.DataGridViewTextBoxColumn TS;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.DataGridView tableBCP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn state;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
     }
 }
 

@@ -24,22 +24,19 @@ namespace Compilador
         int elapsedCurrentTime = 0;
         int timeAcum = 0;
         bool pauseIndicator = false;
-        bool cooldownkey = true;
+        bool cooldownkey = false;
 
         public Principal()
         {
             InitializeComponent();
             tableWorking.RowHeadersVisible = false;
             tableComplete.RowHeadersVisible = false;
-            tableWorking.Enabled = false;
-            tableComplete.Enabled = false;
+            tableNews.RowHeadersVisible = false;
+            tablesFocus(true);
 
-            fieldName.Text = "Anthony E. Sandoval M.";
             nullProcess = new _Process("NULL", 0, 99999, "NULL", 0, 0);
-            textWarnings.ScrollBars = ScrollBars.Vertical;
 
-            tabOutputs.SelectTab(1);
-            tabOutputs.Enabled = false;
+            //tabOutputs.Enabled = false;
             btnIni.Enabled = false;
         }
 
@@ -62,6 +59,8 @@ namespace Compilador
 
         private void btnIni_Click(object sender, EventArgs e)
         {
+            tabOutputs.SelectedIndex = 0;
+            tablesFocus(false);
             cBoxProcesess.Enabled = false;
             fieldCantProcesess.Enabled = false;
             btnAddAll.Enabled = false;
@@ -71,9 +70,13 @@ namespace Compilador
             timerLot.Start(); // Inicio del timer de Lotes
         }
 
-
         private void setProcessTexts(_Process p) //Actualiza los textos del proceso actual
         {
+            p.state = "EJECUCION";
+            p.calculeTimers(timeAcum);
+
+            if (p.id != 0) { execution[getIndexOfProcessList(p)] = p; }
+
             textID.Text = p.id.ToString();
             textOperation.Text = p.operation;
             textTMax.Text = p.maxTime.ToString();
@@ -119,6 +122,15 @@ namespace Compilador
             textTExecuted.Update();
         }
 
+        private void tablesFocus(bool mode)
+        {
+            tableBlock.Enabled = mode;
+            tableComplete.Enabled = mode;
+            tableWorking.Enabled = mode;
+            tableNews.Enabled = mode;
+            tabOutputs.Enabled = mode;
+        }
+
         private int getNumRow(_Process p, DataGridView table) //Obtener el numero de la fila de una tabla por el id del proceso
         {
             for (int i = 0; i < table.Rows.Count; i++)
@@ -157,9 +169,14 @@ namespace Compilador
                     if (execution[i].added == false && processInMemory < MEMORY)
                     {
                         //Tiempo de llegada
-                        setOnReadyTimers(i);
+                        execution[i].calculeTimers(timeAcum);
+
                         addToWorkingTable(execution[i]);
                         execution[i].added = true;
+
+                        tableNews.Rows.RemoveAt(getNumRow(execution[i], tableNews)); //Se elimina el proceso de la tabla de nuevos
+                        tableNews.Update();
+                        textNuevos.Text = countNews().ToString();
                     }
                     processInMemory = (tableWorking.Rows.Count - 1) + (tableBlock.Rows.Count - 1);
                     if (textID.Text != "0") { processInMemory++; }
@@ -179,20 +196,57 @@ namespace Compilador
             return null;
         }
 
-        private void addToBlockTable(_Process p) //Bloqueados
+        private void fillNewsTable() {
+            for (int i = 0; i < execution.Count; i++)
+            {
+                addToNewsTable(execution[i]);
+            }
+        }
+
+        private void fillBCPTable()
         {
-            DataGridViewRow row = (DataGridViewRow)tableBlock.Rows[0].Clone();
+            for (int i = 0; i < execution.Count; i++)
+            {
+                addToBCPTable(execution[i]);
+            }
+        }
+
+        private void addToNewsTable(_Process p) // Nuevos
+        {
+            p.state = "NUEVO";
+            p.calculeTimers(timeAcum);
+            execution[getIndexOfProcessList(p)] = p;
+            DataGridViewRow row = (DataGridViewRow)tableNews.Rows[0].Clone();
             row.Cells[0].Value = p.id;
             row.Cells[1].Value = p.maxTime;
-            row.Cells[2].Value = p.elapsedTme;
-            row.Cells[3].Value = p.operation;
-            row.Cells[4].Value = p.blockTime;
-            tableBlock.Rows.Add(row);
-            tableBlock.Update();
+            row.Cells[2].Value = p.operation;
+            tableNews.Rows.Add(row);
+            tableNews.Update();
+        }
+
+        private void addToBlockTable(_Process p) //Bloqueados
+        {
+            p.state = "BLOQUEADO";
+            p.calculeTimers(timeAcum);
+            execution[getIndexOfProcessList(p)] = p;
+            DataGridViewRow row = (DataGridViewRow)tableBlock.Rows[0].Clone();
+            if (p != null)
+            {
+                row.Cells[0].Value = p.id;
+                row.Cells[1].Value = p.maxTime;
+                row.Cells[2].Value = p.elapsedTme;
+                row.Cells[3].Value = p.operation;
+                row.Cells[4].Value = p.blockTime;
+                tableBlock.Rows.Add(row);
+                tableBlock.Update();
+            }
         }
 
         private void addToWorkingTable(_Process p) // Listos
         {
+            p.state = "LISTO";
+            p.calculeTimers(timeAcum);
+            execution[getIndexOfProcessList(p)] = p;
             DataGridViewRow row = (DataGridViewRow)tableWorking.Rows[0].Clone();
             row.Cells[0].Value = p.id;
             row.Cells[1].Value = p.maxTime;
@@ -202,12 +256,55 @@ namespace Compilador
             tableWorking.Update();
         }
 
+        private void addToBCPTable(_Process p) //BCP
+        {
+            p.setTEsperaBCP(timeAcum);
+            execution[getIndexOfProcessList(p)] = p;
+
+            DataGridViewRow row = (DataGridViewRow)tableBCP.Rows[0].Clone();
+            row.Cells[0].Value = p.id;
+            row.Cells[1].Value = p.n1 + " " + p.getOperationSymbol() + " " + p.n2;
+            if (p.isError == false)
+            {
+                if (p.result == 999.999f)
+                {
+                    row.Cells[2].Value = "null";
+                }
+                else
+                {
+                    row.Cells[2].Value = p.result;
+                }
+            }
+            else
+            {
+                row.Cells[2].Value = "ERROR";
+            }
+            row.Cells[3].Value = p.state;
+            /*Tiempos*/
+            if (p.maxTime == -1) { row.Cells[4].Value = "null"; } else { row.Cells[4].Value = p.maxTime; }
+            if (p.TLlegada == -1) { row.Cells[5].Value = "null"; } else { row.Cells[5].Value = p.TLlegada; }
+            if (p.TFinal == -1) { row.Cells[6].Value = "null"; } else { row.Cells[6].Value = p.TFinal; }
+            if (p.TRetorno == -1) { row.Cells[7].Value = "null"; } else { row.Cells[7].Value = p.TRetorno; }
+            if (p.TRespuesta == -1) { row.Cells[8].Value = "null"; } else { row.Cells[8].Value = p.TRespuesta; }
+            if (p.TEspera == -1) { row.Cells[9].Value = "null"; } else { row.Cells[9].Value = p.TEspera; }
+            if (p.TServicio == -1) { row.Cells[10].Value = "null"; } else { row.Cells[10].Value = p.TServicio; }
+
+            tableBCP.Rows.Add(row);
+            tableBCP.Update();
+        }
+
         private void addToCompleteTable(_Process p) //Completados
         {
+            p.state = "TERMINADO";
+            p.setOperation();
+            p.calculeTimers(timeAcum);
+
+            execution[getIndexOfProcessList(p)] = p;
+
             DataGridViewRow row = (DataGridViewRow)tableComplete.Rows[0].Clone();
             row.Cells[0].Value = p.id;
             row.Cells[1].Value = p.n1 + " " + p.getOperationSymbol() + " " + p.n2;
-            if (p.executed == true){
+            if (p.isError == false){
                 row.Cells[2].Value = p.result;
             }
             else{
@@ -231,48 +328,13 @@ namespace Compilador
             cBoxProcesess.Items.Add("ID: " + p.id + " | Tiempo: " +  p.maxTime + " | Operacion: " + p.operation);
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            /*textWarnings.ForeColor = Color.Red;
-            textWarnings.Text = "";
-            checkName();
-            checkID();
-            checkTime();
-            checkN1();
-            checkN2();
-
-            if (nameb && idb && timeb && n1b && n2b)
-            {
-                _Process p;
-                p = new _Process(fieldName.Text, int.Parse(fieldID.Text), int.Parse(fieldTime.Text),
-                        cBoxOperation.Text, int.Parse(fieldNum1.Text),
-                        int.Parse(fieldNum2.Text));
-                p.setNumLote(getNumLote());
-                //Se agrega el proceso a la tabla y la lista
-                processes.Add(p);
-                addToWorkingTable(p);
-
-                //Asignacion de el numero de procesos
-                totalProcesses++;
-                textProcesses.Text = totalProcesses.ToString();
-
-                textWarnings.ForeColor = Color.Magenta;
-                textWarnings.Text += "<COMPLETADO> " + "PROCESO AGREGADO";
-                textWarnings.Text += Environment.NewLine;
-            }
-            else
-            {
-                textWarnings.Text += "<ERROR> " + "NO SE AGREGO EL PROCESO";
-                textWarnings.Text += Environment.NewLine;
-            }*/
-        }
-
         private void btnAddAll_Click(object sender, EventArgs e)
         {
             resetAll();
             //Gracias al objeto generator se crean todos los procesos con valores aleatorios
             execution = generator.generate(int.Parse(fieldCantProcesess.Text)); // es una variable auxiliar para trabajar con los procesos
             fillComboBoxProcesses(); //Se llena el combo box con los procesos generados
+            fillNewsTable();
             textNuevos.Text = countNews().ToString();
             //datos(execution);
         }
@@ -298,8 +360,9 @@ namespace Compilador
                 {
                     timerProcesess.Stop();
                     elapsedCurrentTime = 0; //Reset del tiempo
-                    setOnCompleteTimers(); //Se calculan los tiempos relacionados con el tiempo global
+                    execution[getIndexOfProcessList(Currentprocess)].isError = true; //Se establece como error
                     addToCompleteTable(getProcess(Currentprocess.id));
+
                     resetTexts();
                     timerLot.Start();
                     cooldownkey = false;
@@ -314,10 +377,37 @@ namespace Compilador
             }
             else if (e.KeyChar == 'c' || e.KeyChar == 'C')
             {
+                tabOutputs.SelectedIndex = 0;
                 pauseIndicator = false;
+
+                tableBCP.Rows.Clear();
+                tableBCP.Refresh();
                 //Se inicia el timer de procesos para comience en el ultimo estado, pues las variables no se resetean
                 timerProcesess.Start();
                 timerBlock.Start();
+            }
+            else if (e.KeyChar == 'n' || e.KeyChar == 'N')
+            {
+                if (pauseIndicator == false && cooldownkey == true)
+                {
+                    _Process p = generator.generateProcess();
+                    
+                    execution.Add(p);
+                    addToNewsTable(p);
+                    textNuevos.Text = countNews().ToString();
+
+                    cooldownkey = false;
+                }
+            }
+            else if (e.KeyChar == 't' || e.KeyChar == 'T')
+            {
+                fillBCPTable();
+
+                tabOutputs.SelectedIndex = 1;
+                pauseIndicator = true;
+                timerProcesess.Stop();
+                timerLot.Stop();
+                timerBlock.Stop();
             }
         }
 
@@ -346,9 +436,10 @@ namespace Compilador
 
                         if (textID.Text == "0") //Si el id es 0 significa que el proceso el null
                         {
+                            nullProcessIndicator = false;
                             timerProcesess.Stop(); //Se detiene el timer de procesos para que se detenga el proceso null
                             timerLot.Start(); //Al comenzar el timer de lotes/memoria se reasignara el currentProcess, ya no sera null
-                            nullProcessIndicator = false;
+                            
                         }
                     }
 
@@ -358,7 +449,7 @@ namespace Compilador
 
         private void timerProcesess_Tick(object sender, EventArgs e)
         {
-            //textKeys.Select();
+            addWorkingLot(); //Comprobar si no hay filas, y si no pues se agrega el primer lote
             //Se ejecutara hasta que se complete el tiempo maximo
             elapsedCurrentTime = Currentprocess.elapsedTme; //Obtengo el tiempo del proceso actual sino empezara siempre de 0
             if (elapsedCurrentTime < Currentprocess.maxTime)
@@ -381,7 +472,6 @@ namespace Compilador
             {
                 elapsedCurrentTime = 0; //Reset del tiempo
                 execution[getIndexOfProcessList(Currentprocess)].executed = true;
-                setOnCompleteTimers(); //Se calculan los tiempos relacionados con el tiempo global
                 addToCompleteTable(Currentprocess); //Se agrega a la tabla de procesos terminados
                 resetTexts();
                 timerProcesess.Stop(); //Se detiene el timer de los procesos
@@ -402,30 +492,29 @@ namespace Compilador
                 tableWorking.Update();
                 
                 setProcessTexts(p); //Actualizar textos con los datos del proceso
-                addWorkingLot(); //Comprobar si no hay filas, y si no pues se agrega el primer lote
+                
                 Currentprocess = p;
                 textNuevos.Text = countNews().ToString();
-                setOnExecuteTimers(); //Se establecen el/los tiempos en cado de entrar a ejecucion
-
+                cooldownkey = true;
                 timerLot.Stop(); //Se detiene el timer de los lotes para que se ejecute el proceso
                 timerProcesess.Start(); //Comienza el tiemer del proceso
+                addWorkingLot(); //Comprobar si no hay filas, y si no pues se agrega el primer lote
             }
             else
             {
                 if (tableBlock.Rows.Count > 1) //Si todavia hay procesos en bloqueado se agregara un proceso nulo
                 {
+                    nullProcessIndicator = true;
                     Currentprocess = nullProcess; //Al proceso actual se le asigna el proceso null
                     setProcessTexts(Currentprocess); //Actualizar textos con los datos del proceso
                     timerLot.Stop();
                     timerProcesess.Start(); //Se comienza en timer de procesos para comience con el proceso null
-                    nullProcessIndicator = true;
                 }
                 else //Cuando ya no exista ningun proceso
                 {
                     //Cuando ya no existen procesos no ejecutados se detiene el timer
                     generator.totalLotes = 0; // Numero de lotes actuales
                     generator.currentNumProcess = 0; // Numero de procesos actuales
-                    //textLotes.Text = generator.totalLotes.ToString();
 
                     cBoxProcesess.Enabled = true;
                     fieldCantProcesess.Enabled = true;
@@ -436,39 +525,11 @@ namespace Compilador
 
                     timerLot.Stop();
                     cooldownkey = true;
+                    tablesFocus(true);
                 }
                 
             }
             
-        }
-
-        private void setOnCompleteTimers()
-        {
-            //Tiempo Finalizacion
-            execution[getIndexOfProcessList(Currentprocess)].setTFinal(timeAcum);
-            Currentprocess.setTFinal(timeAcum);
-            //Tiempo Retorno
-            execution[getIndexOfProcessList(Currentprocess)].setTRetorno();
-            Currentprocess.setTRetorno();
-            //Tiempo Servicio
-            execution[getIndexOfProcessList(Currentprocess)].setTServicio();
-            Currentprocess.setTServicio();
-            //Tiempo Espera
-            execution[getIndexOfProcessList(Currentprocess)].setTEspera();
-            Currentprocess.setTEspera();
-        }
-
-        private void setOnExecuteTimers()
-        {
-            //Tiempo Respuesta
-            execution[getIndexOfProcessList(Currentprocess)].setTRespuesta(timeAcum);
-            Currentprocess.setTRespuesta(timeAcum);
-        }
-
-        private void setOnReadyTimers(int index)
-        {
-            //Tiempo Llegada
-            execution[index].setTLlegada(timeAcum);
         }
 
         private void resetAll()
@@ -481,6 +542,9 @@ namespace Compilador
 
             tableComplete.Rows.Clear();
             tableComplete.Refresh();
+
+            tableNews.Rows.Clear();
+            tableNews.Refresh();
 
             cBoxProcesess.Items.Clear();
             cBoxProcesess.Refresh();
@@ -507,6 +571,9 @@ namespace Compilador
             return cont;
         }
 
-        
+        private void Principal_Click(object sender, EventArgs e)
+        {
+            btnIni.Focus();
+        }
     }
 }
