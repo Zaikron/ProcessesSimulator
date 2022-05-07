@@ -30,16 +30,6 @@ namespace ProcesessSimulator.Utilities
         public int TEspera = -1;
         public int TServicio = -1;
 
-        /*
-         if (p.maxTime == -1) { row.Cells[4].Value = "null"; } else { row.Cells[4].Value = p.maxTime; }
-            if (p.TLlegada == -1) { row.Cells[5].Value = "null"; } else { row.Cells[5].Value = p.TLlegada; }
-            if (p.TFinal == -1) { row.Cells[6].Value = "null"; } else { row.Cells[6].Value = p.TFinal; }
-            if (p.TRetorno == -1) { row.Cells[7].Value = "null"; } else { row.Cells[7].Value = p.TRetorno; }
-            if (p.TRespuesta == -1) { row.Cells[8].Value = "null"; } else { row.Cells[8].Value = p.TRespuesta; }
-            if (p.TEspera == -1) { row.Cells[9].Value = "null"; } else { row.Cells[9].Value = p.TEspera; }
-            if (p.TServicio == -1) { row.Cells[10].Value = "null"; } else { row.Cells[10].Value = p.TServicio; }
-         */
-
 
         public _Process(String name, int id, int maxT, String op, int n1, int n2)
         {

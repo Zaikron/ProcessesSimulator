@@ -15,6 +15,8 @@ namespace Compilador
         int MEMORY = 5; // Procesos maximos en memoria
         //Clase generadora de procesos aleatorios
         ProcessGenerator generator = new ProcessGenerator();
+        int quantum = 0;
+        int currentQuantum = 0;
 
         //Procesos en ejecucion
         List<_Process> execution = new List<_Process>();
@@ -63,7 +65,10 @@ namespace Compilador
             tablesFocus(false);
             cBoxProcesess.Enabled = false;
             fieldCantProcesess.Enabled = false;
+            fieldQuantum.Enabled = false;
             btnAddAll.Enabled = false;
+
+            quantum = int.Parse(fieldQuantum.Text);
             textID.Text = execution[0].id.ToString();
             addWorkingLot(); //Comprobar si no hay filas, y si no pues se agrega el primer lote
             timerBlock.Start(); //Inicia el timer de Bloqueados
@@ -99,10 +104,12 @@ namespace Compilador
             textTTrans.Text = p.elapsedTme.ToString();
             textTRes.Text = (p.maxTime - j).ToString();
             textAcum.Text = timeAcum.ToString();
+            textQuantum.Text = currentQuantum.ToString();
 
             textTTrans.Update();
             textTRes.Update();
             textAcum.Update();
+            textQuantum.Update();
         }
 
         private void resetTexts()
@@ -113,6 +120,7 @@ namespace Compilador
             textTExecuted.Text = "*";
             textTTrans.Text = "0";
             textTRes.Text = "*";
+            textQuantum.Text = "0";
 
             textTTrans.Update();
             textTRes.Update();
@@ -120,6 +128,7 @@ namespace Compilador
             textOperation.Update();
             textTMax.Update();
             textTExecuted.Update();
+            textQuantum.Update();
         }
 
         private void tablesFocus(bool mode)
@@ -347,6 +356,7 @@ namespace Compilador
                 if (pauseIndicator == false && nullProcessIndicator == false && cooldownkey == true)
                 {
                     timerProcesess.Stop();
+                    currentQuantum = 0;
                     elapsedCurrentTime = 0; //Reset del tiempo
                     addToBlockTable(getProcess(Currentprocess.id));
                     resetTexts();
@@ -359,6 +369,7 @@ namespace Compilador
                 if (pauseIndicator == false && nullProcessIndicator == false && cooldownkey == true)
                 {
                     timerProcesess.Stop();
+                    currentQuantum = 0;
                     elapsedCurrentTime = 0; //Reset del tiempo
                     execution[getIndexOfProcessList(Currentprocess)].isError = true; //Se establece como error
                     addToCompleteTable(getProcess(Currentprocess.id));
@@ -458,18 +469,31 @@ namespace Compilador
                 timeAcum++;
                 if (nullProcessIndicator == false)
                 {
-                    // Se establece el tiempo transcurrido en el objeto de proceso actual
-                    execution[getIndexOfProcessList(Currentprocess)].elapsedTme = elapsedCurrentTime;
-                    setTimerTexts(Currentprocess, elapsedCurrentTime); //Actualizar los tiempos del proceso y tiempo total
+                    if (currentQuantum < quantum)
+                    {
+                        // Se establece el tiempo transcurrido en el objeto de proceso actual
+                        execution[getIndexOfProcessList(Currentprocess)].elapsedTme = elapsedCurrentTime;
+                        currentQuantum++;
+                        setTimerTexts(Currentprocess, elapsedCurrentTime); //Actualizar los tiempos del proceso y tiempo total
+                    }
+                    else
+                    {
+                        addToWorkingTable(Currentprocess);
+                        currentQuantum = 0;
+                        timerProcesess.Stop(); //Se detiene el timer de los procesos
+                        timerLot.Start(); // y se vuelve a iniciar el timer de los lotes
+                    }
                 }
                 else
                 {
+                    currentQuantum = 0;
                     setTimerTexts(Currentprocess, elapsedCurrentTime); //Actualizar los tiempos del proceso y tiempo total
                 }
                 cooldownkey = true;
             }
             else //Cuando termine el tiempo maximo
             {
+                currentQuantum = 0;
                 elapsedCurrentTime = 0; //Reset del tiempo
                 execution[getIndexOfProcessList(Currentprocess)].executed = true;
                 addToCompleteTable(Currentprocess); //Se agrega a la tabla de procesos terminados
@@ -518,6 +542,7 @@ namespace Compilador
 
                     cBoxProcesess.Enabled = true;
                     fieldCantProcesess.Enabled = true;
+                    fieldQuantum.Enabled = true;
                     btnIni.Enabled = false;
                     btnAddAll.Enabled = true;
                     cBoxProcesess.Items.Clear();

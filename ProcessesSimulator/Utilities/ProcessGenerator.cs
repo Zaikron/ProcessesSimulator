@@ -10,6 +10,7 @@ namespace ProcesessSimulator.Utilities
         public int totalLotes = 0; // Numero de lotes actuales
         public int currentNumProcess = 0; // Numero de procesos actuales
         public int actualID = 0;
+        Random r = new Random();
         public ProcessGenerator()
         {
 
@@ -46,13 +47,11 @@ namespace ProcesessSimulator.Utilities
 
         private int generateTime()
         {
-            Random r = new Random();
             return r.Next(6, 17);
         }
 
         private string generateOperation()
         {
-            Random r = new Random();
             int selector = r.Next(1, 6);
             if (selector == 1)
             {
@@ -78,13 +77,11 @@ namespace ProcesessSimulator.Utilities
 
         private int generateNum1()
         {
-            Random r = new Random();
             return r.Next(1, 50);
         }
 
         private int generateNum2()
         {
-            Random r = new Random();
             return r.Next(1, 50);
         }
 

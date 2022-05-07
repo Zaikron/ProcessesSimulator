@@ -46,6 +46,8 @@ namespace Compilador
             this.operationWorking = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnIni = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.fieldQuantum = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.textKey = new System.Windows.Forms.Label();
             this.btnAddAll = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
@@ -106,6 +108,8 @@ namespace Compilador
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textQuantum = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableNews)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tableWorking)).BeginInit();
@@ -244,9 +248,9 @@ namespace Compilador
             // 
             // btnIni
             // 
-            this.btnIni.Location = new System.Drawing.Point(295, 169);
+            this.btnIni.Location = new System.Drawing.Point(209, 196);
             this.btnIni.Name = "btnIni";
-            this.btnIni.Size = new System.Drawing.Size(81, 23);
+            this.btnIni.Size = new System.Drawing.Size(167, 23);
             this.btnIni.TabIndex = 1;
             this.btnIni.Text = "Iniciar";
             this.btnIni.UseVisualStyleBackColor = true;
@@ -256,6 +260,8 @@ namespace Compilador
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.fieldQuantum);
+            this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.textKey);
             this.panel2.Controls.Add(this.btnAddAll);
             this.panel2.Controls.Add(this.label21);
@@ -266,8 +272,25 @@ namespace Compilador
             this.panel2.Controls.Add(this.btnIni);
             this.panel2.Location = new System.Drawing.Point(614, 353);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(388, 200);
+            this.panel2.Size = new System.Drawing.Size(388, 225);
             this.panel2.TabIndex = 2;
+            // 
+            // fieldQuantum
+            // 
+            this.fieldQuantum.Location = new System.Drawing.Point(133, 197);
+            this.fieldQuantum.Name = "fieldQuantum";
+            this.fieldQuantum.Size = new System.Drawing.Size(29, 23);
+            this.fieldQuantum.TabIndex = 8;
+            this.fieldQuantum.Text = "4";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 200);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(109, 15);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Valor del Quantum:";
             // 
             // textKey
             // 
@@ -280,9 +303,9 @@ namespace Compilador
             // 
             // btnAddAll
             // 
-            this.btnAddAll.Location = new System.Drawing.Point(181, 169);
+            this.btnAddAll.Location = new System.Drawing.Point(209, 169);
             this.btnAddAll.Name = "btnAddAll";
-            this.btnAddAll.Size = new System.Drawing.Size(108, 23);
+            this.btnAddAll.Size = new System.Drawing.Size(167, 23);
             this.btnAddAll.TabIndex = 6;
             this.btnAddAll.Text = "Agregar Procesos";
             this.btnAddAll.UseVisualStyleBackColor = true;
@@ -326,31 +349,34 @@ namespace Compilador
             this.tableLayoutPanel2.Controls.Add(this.textTMax, 1, 3);
             this.tableLayoutPanel2.Controls.Add(this.textTTrans, 1, 4);
             this.tableLayoutPanel2.Controls.Add(this.textTRes, 1, 5);
-            this.tableLayoutPanel2.Controls.Add(this.label17, 0, 6);
-            this.tableLayoutPanel2.Controls.Add(this.textAcum, 1, 6);
             this.tableLayoutPanel2.Controls.Add(this.label12, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.textID, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label13, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.textOperation, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.label11, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.textTExecuted, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label17, 0, 7);
+            this.tableLayoutPanel2.Controls.Add(this.textAcum, 1, 7);
+            this.tableLayoutPanel2.Controls.Add(this.label5, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.textQuantum, 1, 6);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 22);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 7;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel2.RowCount = 8;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(373, 138);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(3, 57);
+            this.label14.Location = new System.Drawing.Point(3, 51);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(93, 15);
             this.label14.TabIndex = 3;
@@ -359,7 +385,7 @@ namespace Compilador
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(3, 76);
+            this.label15.Location = new System.Drawing.Point(3, 68);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(118, 15);
             this.label15.TabIndex = 4;
@@ -368,7 +394,7 @@ namespace Compilador
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(3, 95);
+            this.label16.Location = new System.Drawing.Point(3, 85);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(98, 15);
             this.label16.TabIndex = 5;
@@ -377,7 +403,7 @@ namespace Compilador
             // textTMax
             // 
             this.textTMax.AutoSize = true;
-            this.textTMax.Location = new System.Drawing.Point(178, 57);
+            this.textTMax.Location = new System.Drawing.Point(178, 51);
             this.textTMax.Name = "textTMax";
             this.textTMax.Size = new System.Drawing.Size(12, 15);
             this.textTMax.TabIndex = 9;
@@ -386,7 +412,7 @@ namespace Compilador
             // textTTrans
             // 
             this.textTTrans.AutoSize = true;
-            this.textTTrans.Location = new System.Drawing.Point(178, 76);
+            this.textTTrans.Location = new System.Drawing.Point(178, 68);
             this.textTTrans.Name = "textTTrans";
             this.textTTrans.Size = new System.Drawing.Size(12, 15);
             this.textTTrans.TabIndex = 10;
@@ -395,7 +421,7 @@ namespace Compilador
             // textTRes
             // 
             this.textTRes.AutoSize = true;
-            this.textTRes.Location = new System.Drawing.Point(178, 95);
+            this.textTRes.Location = new System.Drawing.Point(178, 85);
             this.textTRes.Name = "textTRes";
             this.textTRes.Size = new System.Drawing.Size(12, 15);
             this.textTRes.TabIndex = 11;
@@ -404,7 +430,7 @@ namespace Compilador
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(3, 114);
+            this.label17.Location = new System.Drawing.Point(3, 119);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(118, 15);
             this.label17.TabIndex = 12;
@@ -413,7 +439,7 @@ namespace Compilador
             // textAcum
             // 
             this.textAcum.AutoSize = true;
-            this.textAcum.Location = new System.Drawing.Point(178, 114);
+            this.textAcum.Location = new System.Drawing.Point(178, 119);
             this.textAcum.Name = "textAcum";
             this.textAcum.Size = new System.Drawing.Size(12, 15);
             this.textAcum.TabIndex = 13;
@@ -440,7 +466,7 @@ namespace Compilador
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(3, 19);
+            this.label13.Location = new System.Drawing.Point(3, 17);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(65, 15);
             this.label13.TabIndex = 2;
@@ -449,7 +475,7 @@ namespace Compilador
             // textOperation
             // 
             this.textOperation.AutoSize = true;
-            this.textOperation.Location = new System.Drawing.Point(178, 19);
+            this.textOperation.Location = new System.Drawing.Point(178, 17);
             this.textOperation.Name = "textOperation";
             this.textOperation.Size = new System.Drawing.Size(12, 15);
             this.textOperation.TabIndex = 8;
@@ -458,7 +484,7 @@ namespace Compilador
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 38);
+            this.label11.Location = new System.Drawing.Point(3, 34);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(168, 15);
             this.label11.TabIndex = 14;
@@ -467,7 +493,7 @@ namespace Compilador
             // textTExecuted
             // 
             this.textTExecuted.AutoSize = true;
-            this.textTExecuted.Location = new System.Drawing.Point(178, 38);
+            this.textTExecuted.Location = new System.Drawing.Point(178, 34);
             this.textTExecuted.Name = "textTExecuted";
             this.textTExecuted.Size = new System.Drawing.Size(12, 15);
             this.textTExecuted.TabIndex = 15;
@@ -557,7 +583,7 @@ namespace Compilador
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.tableBlock);
             this.panel4.Controls.Add(this.label22);
-            this.panel4.Location = new System.Drawing.Point(12, 351);
+            this.panel4.Location = new System.Drawing.Point(8, 376);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(596, 202);
             this.panel4.TabIndex = 5;
@@ -569,7 +595,7 @@ namespace Compilador
             this.tabOutputs.Location = new System.Drawing.Point(12, 12);
             this.tabOutputs.Name = "tabOutputs";
             this.tabOutputs.SelectedIndex = 0;
-            this.tabOutputs.Size = new System.Drawing.Size(596, 333);
+            this.tabOutputs.Size = new System.Drawing.Size(596, 358);
             this.tabOutputs.TabIndex = 6;
             // 
             // tabPage1
@@ -580,7 +606,7 @@ namespace Compilador
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(588, 305);
+            this.tabPage1.Size = new System.Drawing.Size(588, 330);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Terminados";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -683,7 +709,7 @@ namespace Compilador
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(588, 305);
+            this.tabPage2.Size = new System.Drawing.Size(588, 330);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "BCP";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -766,11 +792,29 @@ namespace Compilador
             this.dataGridViewTextBoxColumn17.HeaderText = "TS";
             this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 102);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(137, 15);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "Quantum (Transcurrido):";
+            // 
+            // textQuantum
+            // 
+            this.textQuantum.AutoSize = true;
+            this.textQuantum.Location = new System.Drawing.Point(178, 102);
+            this.textQuantum.Name = "textQuantum";
+            this.textQuantum.Size = new System.Drawing.Size(12, 15);
+            this.textQuantum.TabIndex = 17;
+            this.textQuantum.Text = "*";
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1007, 565);
+            this.ClientSize = new System.Drawing.Size(1007, 587);
             this.Controls.Add(this.tabOutputs);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
@@ -878,6 +922,10 @@ namespace Compilador
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
+        private System.Windows.Forms.TextBox fieldQuantum;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label textQuantum;
     }
 }
 
