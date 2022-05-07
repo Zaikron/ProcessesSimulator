@@ -22,7 +22,7 @@ namespace ProcesessSimulator.Utilities
             {
                 _Process p;
                 p = new _Process("Anthony Sandoval", generateID(), generateTime(),
-                            generateOperation(), generateNum1(), generateNum2());
+                            generateOperation(), generateNum1(), generateNum2(), generateMemory());
                 p.setNumLote(getNumLote());
                 processes.Add(p);
             }
@@ -33,7 +33,7 @@ namespace ProcesessSimulator.Utilities
         {
             _Process p;
             p = new _Process("Anthony Sandoval", generateID(), generateTime(),
-                        generateOperation(), generateNum1(), generateNum2());
+                        generateOperation(), generateNum1(), generateNum2(), generateMemory());
             p.setNumLote(getNumLote());
 
             return p;
@@ -85,7 +85,10 @@ namespace ProcesessSimulator.Utilities
             return r.Next(1, 50);
         }
 
-
+        private int generateMemory()
+        {
+            return r.Next(5, 27);
+        }
 
         private int getNumLote()
         {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using ProcesessSimulator.Utilities;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace Compilador
 {
@@ -12,11 +13,12 @@ namespace Compilador
         int BLOCKED_TIME = 8; //Constante para el tiempo de bloqueo
         _Process nullProcess; //Proceso nulo para mantener en ejecucion al procesador
         bool nullProcessIndicator = false;
-        int MEMORY = 5; // Procesos maximos en memoria
+        //int MEMORY = 5; // Procesos maximos en memoria
         //Clase generadora de procesos aleatorios
         ProcessGenerator generator = new ProcessGenerator();
         int quantum = 0;
         int currentQuantum = 0;
+        int tamMarco = 4;
 
         //Procesos en ejecucion
         List<_Process> execution = new List<_Process>();
@@ -35,24 +37,12 @@ namespace Compilador
             tableComplete.RowHeadersVisible = false;
             tableNews.RowHeadersVisible = false;
             tablesFocus(true);
-
-            nullProcess = new _Process("NULL", 0, 99999, "NULL", 0, 0);
+             
+            nullProcess = new _Process("NULL", 0, 99999, "NULL", 0, 0, 0);
 
             //tabOutputs.Enabled = false;
             btnIni.Enabled = false;
-        }
 
-        private void datos(List<_Process> p)
-        {
-            for (int i = 0; i < p.Count; i++)
-            {
-                Debug.WriteLine("id: " + p[i].id);
-                Debug.WriteLine("added: " + p[i].added);
-                Debug.WriteLine("executed: " + p[i].executed);
-                Debug.WriteLine("tMax: " + p[i].maxTime);
-                Debug.WriteLine("tT: " + p[i].elapsedTme);
-                Debug.WriteLine("\n");
-            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e){}
@@ -79,24 +69,25 @@ namespace Compilador
         {
             p.state = "EJECUCION";
             p.calculeTimers(timeAcum);
+            paintPages(p, Color.Green, Color.White);
 
             if (p.id != 0) { execution[getIndexOfProcessList(p)] = p; }
 
             textID.Text = p.id.ToString();
             textOperation.Text = p.operation;
             textTMax.Text = p.maxTime.ToString();
-            //textLotes.Text = (generator.totalLotes - p.numLote + 1).ToString(); //+1 para que concuerden
-            //textCurrentLot.Text = p.numLote.ToString();
             textTExecuted.Text = p.elapsedTme.ToString();
+            textMem.Text = p.memory.ToString();
+            textMarcos.Text = getNeededMarcos(p).ToString();
             
 
             textID.Update();
             textOperation.Update();
             textTMax.Update();
-            //textLotes.Update();
-            //textCurrentLot.Update();
             textTExecuted.Update();
             textNuevos.Update();
+            textMem.Update();
+            textMarcos.Update();
         }
 
         private void setTimerTexts(_Process p, int j) //Actualiza los textos de los tiempos
@@ -121,6 +112,8 @@ namespace Compilador
             textTTrans.Text = "0";
             textTRes.Text = "*";
             textQuantum.Text = "0";
+            textMem.Text = "*";
+            textMarcos.Text = "*";
 
             textTTrans.Update();
             textTRes.Update();
@@ -129,6 +122,8 @@ namespace Compilador
             textTMax.Update();
             textTExecuted.Update();
             textQuantum.Update();
+            textMem.Update();
+            textMarcos.Update();
         }
 
         private void tablesFocus(bool mode)
@@ -145,7 +140,7 @@ namespace Compilador
             for (int i = 0; i < table.Rows.Count; i++)
             {   
                 //  Recorrido de las filas, por el valor de la primara columna
-                if (table.Rows[i].Cells[0].Value == p.id.ToString())
+                if (table.Rows[i].Cells[0].Value.ToString() == p.id.ToString())
                 {
                     return i;
                 }
@@ -167,16 +162,14 @@ namespace Compilador
 
         private void addWorkingLot() //Se agregan los procesos de un lote a la tabla, por separado
         {
-            int processInMemory = (tableWorking.Rows.Count - 1) + (tableBlock.Rows.Count - 1);
-            if (textID.Text != "0") { processInMemory++; }
-            Debug.WriteLine("Process: " + processInMemory);
-
-            if (processInMemory < MEMORY)
+            for (int i = 0; i < execution.Count; i++)
             {
-                for (int i = 0; i < execution.Count; i++)
+                if (execution[i].added == false)
                 {
-                    if (execution[i].added == false && processInMemory < MEMORY)
+                    if (isThereMemory(execution[i]))
                     {
+                        addPagesToMem(execution[i]);
+
                         //Tiempo de llegada
                         execution[i].calculeTimers(timeAcum);
 
@@ -184,13 +177,12 @@ namespace Compilador
                         execution[i].added = true;
 
                         tableNews.Rows.RemoveAt(getNumRow(execution[i], tableNews)); //Se elimina el proceso de la tabla de nuevos
-                        tableNews.Update();
+                        //tableNews.Update();
                         textNuevos.Text = countNews().ToString();
                     }
-                    processInMemory = (tableWorking.Rows.Count - 1) + (tableBlock.Rows.Count - 1);
-                    if (textID.Text != "0") { processInMemory++; }
                 }
             }
+
         }
 
         private _Process getProcess(int id)
@@ -229,14 +221,17 @@ namespace Compilador
             row.Cells[0].Value = p.id;
             row.Cells[1].Value = p.maxTime;
             row.Cells[2].Value = p.operation;
+            row.Cells[3].Value = p.memory;
+            row.Cells[4].Value = getNeededMarcos(p);
             tableNews.Rows.Add(row);
-            tableNews.Update();
+            //tableNews.Update();
         }
 
         private void addToBlockTable(_Process p) //Bloqueados
         {
             p.state = "BLOQUEADO";
             p.calculeTimers(timeAcum);
+            paintPages(p, Color.DarkRed, Color.White);
             execution[getIndexOfProcessList(p)] = p;
             DataGridViewRow row = (DataGridViewRow)tableBlock.Rows[0].Clone();
             if (p != null)
@@ -247,7 +242,7 @@ namespace Compilador
                 row.Cells[3].Value = p.operation;
                 row.Cells[4].Value = p.blockTime;
                 tableBlock.Rows.Add(row);
-                tableBlock.Update();
+                //tableBlock.Update();
             }
         }
 
@@ -255,14 +250,17 @@ namespace Compilador
         {
             p.state = "LISTO";
             p.calculeTimers(timeAcum);
+            paintPages(p, Color.LightGreen, Color.Black);
             execution[getIndexOfProcessList(p)] = p;
             DataGridViewRow row = (DataGridViewRow)tableWorking.Rows[0].Clone();
             row.Cells[0].Value = p.id;
             row.Cells[1].Value = p.maxTime;
             row.Cells[2].Value = p.elapsedTme;
             row.Cells[3].Value = p.operation;
+            row.Cells[4].Value = p.memory;
+            row.Cells[5].Value = getNeededMarcos(p);
             tableWorking.Rows.Add(row);
-            tableWorking.Update();
+            //tableWorking.Update();
         }
 
         private void addToBCPTable(_Process p) //BCP
@@ -299,7 +297,7 @@ namespace Compilador
             if (p.TServicio == -1) { row.Cells[10].Value = "null"; } else { row.Cells[10].Value = p.TServicio; }
 
             tableBCP.Rows.Add(row);
-            tableBCP.Update();
+            //tableBCP.Update();
         }
 
         private void addToCompleteTable(_Process p) //Completados
@@ -329,7 +327,7 @@ namespace Compilador
             row.Cells[9].Value = p.TServicio;
 
             tableComplete.Rows.Add(row);
-            tableComplete.Update();
+            //tableComplete.Update();
         }
 
         private void addToProcesessBox(_Process p)
@@ -373,6 +371,7 @@ namespace Compilador
                     elapsedCurrentTime = 0; //Reset del tiempo
                     execution[getIndexOfProcessList(Currentprocess)].isError = true; //Se establece como error
                     addToCompleteTable(getProcess(Currentprocess.id));
+                    removePages(Currentprocess); //Remover paginas del proceso de la memoria
 
                     resetTexts();
                     timerLot.Start();
@@ -380,6 +379,13 @@ namespace Compilador
                 }
             }
             else if (e.KeyChar == 'p' || e.KeyChar == 'P')
+            {
+                pauseIndicator = true;
+                timerProcesess.Stop();
+                timerLot.Stop();
+                timerBlock.Stop();
+            }
+            else if (e.KeyChar == 'a' || e.KeyChar == 'A')
             {
                 pauseIndicator = true;
                 timerProcesess.Stop();
@@ -497,6 +503,7 @@ namespace Compilador
                 elapsedCurrentTime = 0; //Reset del tiempo
                 execution[getIndexOfProcessList(Currentprocess)].executed = true;
                 addToCompleteTable(Currentprocess); //Se agrega a la tabla de procesos terminados
+                removePages(Currentprocess); //Remover paginas del proceso de la memoria
                 resetTexts();
                 timerProcesess.Stop(); //Se detiene el timer de los procesos
                 timerLot.Start(); // y se vuelve a iniciar el timer de los lotes
@@ -600,5 +607,123 @@ namespace Compilador
         {
             btnIni.Focus();
         }
+
+
+        /*** Paginacion ***/
+        private void addPagesToMem(_Process p)
+        {
+            int mem = p.memory;
+            int marcos = mem / tamMarco;
+            int barIncrement = 100 / tamMarco;
+            ProgressBar auxBar;
+
+            if (mem % tamMarco > 0)
+            {
+                marcos++;
+                for (int i = 0; i < marcos; i++)
+                {
+                    for (int j = 1; j < layMem.RowCount; j++)
+                    {
+                        if (layMem.GetControlFromPosition(1, j).Text.Equals("-"))
+                        {
+                            //Se agrega la pagina con valor 5
+                            auxBar = (ProgressBar)layMem.GetControlFromPosition(2, j);
+                            layMem.GetControlFromPosition(1, j).Text = p.id.ToString();
+                            layMem.GetControlFromPosition(1, j).Update();
+                            if (i == marcos-1) //Ultimo elemento
+                            {
+                                //Se agrega la pagina con valor del residuo
+                                auxBar.Value = barIncrement * (mem % tamMarco);
+                            }
+                            else{
+                                auxBar.Value = barIncrement * tamMarco;
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < marcos; i++)
+                {
+                    for (int j = 1; j < layMem.RowCount; j++)
+                    {
+                        if (layMem.GetControlFromPosition(1, j).Text.Equals("-"))
+                        {
+                            //Se agrega la pagina con valor 5
+                            auxBar = (ProgressBar)layMem.GetControlFromPosition(2, j);
+                            layMem.GetControlFromPosition(1, j).Text = p.id.ToString();
+                            layMem.GetControlFromPosition(1, j).Update();
+                            auxBar.Value = barIncrement * tamMarco;
+                            break;
+                        }
+                    }
+                }
+            }
+
+        }
+
+        private int getNeededMarcos(_Process p)
+        {
+            int mem = p.memory;
+            int marcos = mem / tamMarco;
+
+            if (mem % tamMarco > 0)
+            {
+                marcos++;
+            }
+
+            return marcos; 
+        }
+
+        private bool isThereMemory(_Process p)
+        {
+            int marcosCont = 0;
+            int marcos = getNeededMarcos(p);
+
+            for (int i = 1; i < layMem.RowCount; i++)
+            {
+                if (layMem.GetControlFromPosition(1, i).Text.Equals("-"))
+                {
+                    marcosCont++;
+                }
+                if (marcosCont == marcos)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void removePages(_Process p)
+        {
+            ProgressBar auxBar;
+            for (int i = 1; i < layMem.RowCount; i++)
+            {
+                if (layMem.GetControlFromPosition(1, i).Text.Equals(p.id.ToString()))
+                {
+                    auxBar = (ProgressBar)layMem.GetControlFromPosition(2, i);
+
+                    layMem.GetControlFromPosition(1, i).Text = "-";
+                    layMem.GetControlFromPosition(1, i).BackColor = Color.LightGreen;
+                    layMem.GetControlFromPosition(1, i).ForeColor = Color.Black;
+                    auxBar.Value = 0;
+                }
+            }
+        }
+
+        private void paintPages(_Process p, Color back, Color fore)
+        {
+            for (int i = 1; i < layMem.RowCount; i++)
+            {
+                if (layMem.GetControlFromPosition(1, i).Text.Equals(p.id.ToString()))
+                {
+                    layMem.GetControlFromPosition(1, i).BackColor = back;
+                    layMem.GetControlFromPosition(1, i).ForeColor = fore;
+                }
+            }
+        }
+
     }
 }

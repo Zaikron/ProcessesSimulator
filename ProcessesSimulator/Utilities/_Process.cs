@@ -12,9 +12,11 @@ namespace ProcesessSimulator.Utilities
         public int n2;
         public float result = 999.999f;
         public int numLote = 0;
+        public int memory = 0;
         public bool isError = false;
         public bool executed = false;
         public bool added = false;
+        public bool inMemory = false;
         public int elapsedTme = 0;
         public int blockTime = 0;
         public string state = "NUEVO";
@@ -31,7 +33,7 @@ namespace ProcesessSimulator.Utilities
         public int TServicio = -1;
 
 
-        public _Process(String name, int id, int maxT, String op, int n1, int n2)
+        public _Process(String name, int id, int maxT, String op, int n1, int n2, int mem)
         {
             this.programerName = name;
             this.id = id;
@@ -39,6 +41,7 @@ namespace ProcesessSimulator.Utilities
             this.operation = op;
             this.n1 = n1;
             this.n2 = n2;
+            this.memory = mem;
 
             //setOperation();
         }
