@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using ProcesessSimulator.Utilities;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 
 namespace Compilador
 {
@@ -42,7 +43,6 @@ namespace Compilador
 
             //tabOutputs.Enabled = false;
             btnIni.Enabled = false;
-
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e){}
@@ -241,6 +241,7 @@ namespace Compilador
                 row.Cells[2].Value = p.elapsedTme;
                 row.Cells[3].Value = p.operation;
                 row.Cells[4].Value = p.blockTime;
+                row.Cells[5].Value = p.memory;
                 tableBlock.Rows.Add(row);
                 //tableBlock.Update();
             }
@@ -330,6 +331,24 @@ namespace Compilador
             //tableComplete.Update();
         }
 
+        private void addToSuspTable(_Process p)
+        {
+            p.state = "SUSPENDIDO";
+            p.calculeTimers(timeAcum);
+            execution[getIndexOfProcessList(p)] = p;
+            DataGridViewRow row = (DataGridViewRow)tableSusp.Rows[0].Clone();
+            if (p != null)
+            {
+                row.Cells[0].Value = p.id;
+                row.Cells[1].Value = p.maxTime;
+                row.Cells[2].Value = p.elapsedTme;
+                row.Cells[3].Value = p.memory;
+                row.Cells[4].Value = getNeededMarcos(p);
+                tableSusp.Rows.Add(row);
+                //tableBlock.Update();
+            }
+        }
+
         private void addToProcesessBox(_Process p)
         {
             cBoxProcesess.Items.Add("ID: " + p.id + " | Tiempo: " +  p.maxTime + " | Operacion: " + p.operation);
@@ -408,7 +427,7 @@ namespace Compilador
                 if (pauseIndicator == false && cooldownkey == true)
                 {
                     _Process p = generator.generateProcess();
-                    
+
                     execution.Add(p);
                     addToNewsTable(p);
                     textNuevos.Text = countNews().ToString();
@@ -425,6 +444,54 @@ namespace Compilador
                 timerProcesess.Stop();
                 timerLot.Stop();
                 timerBlock.Stop();
+            }
+            else if (e.KeyChar == 's' || e.KeyChar == 'S') //Sale a suspendido
+            {
+                if (tableBlock.Rows.Count > 1)
+                {
+                    _Process auxProcess = getProcess((int)tableBlock.Rows[0].Cells[0].Value);
+                    int index = getIndexOfProcessList(auxProcess);
+
+                    execution[index].suspendido = true;
+                    removePages(execution[index]);
+                    tableBlock.Rows.RemoveAt(0);
+
+                    addToSuspTable(execution[index]);
+                    tableSusp.Update();
+                    writeDocument();
+                }
+            }
+            else if (e.KeyChar == 'r' || e.KeyChar == 'R') //Regresa
+            {
+                if (tableSusp.Rows.Count > 1)
+                {
+                    _Process auxProcess = getProcess((int)tableSusp.Rows[0].Cells[0].Value);
+                    int index = getIndexOfProcessList(auxProcess);
+
+                    execution[index].suspendido = false;
+                    tableSusp.Rows.RemoveAt(0);
+                    tableSusp.Update();
+                    writeDocument();
+
+                    if (isThereMemory(execution[index]))
+                    {
+                        addPagesToMem(execution[index]);
+                        addToWorkingTable(execution[index]);
+                    }
+                    else
+                    {
+                        execution[index].added = false;
+                        addToNewsTable(execution[index]);
+                    }
+
+                    if (textID.Text == "0") //Si el id es 0 significa que hay un proceso null
+                    {
+                        nullProcessIndicator = false;
+                        paintPages(nullProcess, Color.DodgerBlue, Color.White);
+                        timerProcesess.Stop(); //Se detiene el timer de procesos para que se detenga el proceso null
+                        timerLot.Start(); //Al comenzar el timer de lotes/memoria se reasignara el currentProcess, ya no sera null
+                    }
+                }
             }
         }
 
@@ -451,9 +518,10 @@ namespace Compilador
                         tableBlock.Rows.RemoveAt(0); //Se elimina la primera posicion de la tabla
                         addToWorkingTable(execution[index]);
 
-                        if (textID.Text == "0") //Si el id es 0 significa que el proceso el null
+                        if (textID.Text == "0") //Si el id es 0 significa que el proceso es null
                         {
                             nullProcessIndicator = false;
+                            paintPages(nullProcess, Color.DodgerBlue, Color.White);
                             timerProcesess.Stop(); //Se detiene el timer de procesos para que se detenga el proceso null
                             timerLot.Start(); //Al comenzar el timer de lotes/memoria se reasignara el currentProcess, ya no sera null
                             
@@ -533,7 +601,7 @@ namespace Compilador
             }
             else
             {
-                if (tableBlock.Rows.Count > 1) //Si todavia hay procesos en bloqueado se agregara un proceso nulo
+                if (tableBlock.Rows.Count > 1 || tableSusp.Rows.Count > 1) //Si todavia hay procesos en bloqueado o suspendido se agregara un proceso nulo
                 {
                     nullProcessIndicator = true;
                     Currentprocess = nullProcess; //Al proceso actual se le asigna el proceso null
@@ -580,6 +648,7 @@ namespace Compilador
 
             cBoxProcesess.Items.Clear();
             cBoxProcesess.Refresh();
+            File.WriteAllText("Suspendidos.txt", "");
         }
 
         private void fillComboBoxProcesses()
@@ -723,6 +792,30 @@ namespace Compilador
                     layMem.GetControlFromPosition(1, i).ForeColor = fore;
                 }
             }
+        }
+
+        /*** Escritura de documento ***/
+        private void writeDocument()
+        {
+            string input = "";
+            string[] lines = new string[tableSusp.Rows.Count - 1];
+            _Process auxProcess;
+            _Process p;
+            int index;
+
+            File.WriteAllText("Suspendidos.txt", input);
+            for (int i = 0; i < tableSusp.Rows.Count - 1; i++)
+            {
+                auxProcess = getProcess((int)tableSusp.Rows[i].Cells[0].Value);
+                index = getIndexOfProcessList(auxProcess);
+                p = execution[index];
+
+                input = "ID: " + p.id + " \nEstado: " + p.state + "\nOperacion: " + p.operation + "\nTamaño: " + p.memory
+                            + "\nT Max: " + p.maxTime + "\nTranscurrido: " + p.elapsedTme + "\n\n";
+
+                lines[i] = input;
+            }
+            File.WriteAllLines("Suspendidos.txt", lines);
         }
 
     }

@@ -17,6 +17,7 @@ namespace ProcesessSimulator.Utilities
         public bool executed = false;
         public bool added = false;
         public bool inMemory = false;
+        public bool suspendido = false;
         public int elapsedTme = 0;
         public int blockTime = 0;
         public string state = "NUEVO";

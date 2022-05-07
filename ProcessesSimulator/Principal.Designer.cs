@@ -58,22 +58,26 @@ namespace Compilador
             this.fieldCantProcesess = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.textTMax = new System.Windows.Forms.Label();
-            this.textTTrans = new System.Windows.Forms.Label();
-            this.textTRes = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.textID = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.textOperation = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.textTExecuted = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.textAcum = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textAcum = new System.Windows.Forms.Label();
             this.textQuantum = new System.Windows.Forms.Label();
+            this.textTRes = new System.Windows.Forms.Label();
+            this.textTTrans = new System.Windows.Forms.Label();
+            this.textTMax = new System.Windows.Forms.Label();
+            this.textTExecuted = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.textMem = new System.Windows.Forms.Label();
+            this.textMarcos = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.timerProcesess = new System.Windows.Forms.Timer(this.components);
             this.timerLot = new System.Windows.Forms.Timer(this.components);
@@ -84,8 +88,16 @@ namespace Compilador
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.blockedT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tamB = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label22 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label37 = new System.Windows.Forms.Label();
+            this.tableSusp = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marcosS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabOutputs = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.cBoxProcesess = new System.Windows.Forms.ComboBox();
@@ -268,10 +280,6 @@ namespace Compilador
             this.progressBar48 = new System.Windows.Forms.ProgressBar();
             this.progressBar49 = new System.Windows.Forms.ProgressBar();
             this.progressBar50 = new System.Windows.Forms.ProgressBar();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
-            this.textMem = new System.Windows.Forms.Label();
-            this.textMarcos = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableNews)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tableWorking)).BeginInit();
@@ -279,6 +287,7 @@ namespace Compilador
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableBlock)).BeginInit();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tableSusp)).BeginInit();
             this.tabOutputs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableComplete)).BeginInit();
@@ -566,60 +575,6 @@ namespace Compilador
             this.tableLayoutPanel2.Size = new System.Drawing.Size(329, 154);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(3, 75);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(93, 15);
-            this.label14.TabIndex = 3;
-            this.label14.Text = "Tiempo Maxino:";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(3, 90);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(118, 15);
-            this.label15.TabIndex = 4;
-            this.label15.Text = "Tiempo Transcurrido:";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(3, 105);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(98, 15);
-            this.label16.TabIndex = 5;
-            this.label16.Text = "Tiempo Restante:";
-            // 
-            // textTMax
-            // 
-            this.textTMax.AutoSize = true;
-            this.textTMax.Location = new System.Drawing.Point(157, 75);
-            this.textTMax.Name = "textTMax";
-            this.textTMax.Size = new System.Drawing.Size(12, 15);
-            this.textTMax.TabIndex = 9;
-            this.textTMax.Text = "*";
-            // 
-            // textTTrans
-            // 
-            this.textTTrans.AutoSize = true;
-            this.textTTrans.Location = new System.Drawing.Point(157, 90);
-            this.textTTrans.Name = "textTTrans";
-            this.textTTrans.Size = new System.Drawing.Size(12, 15);
-            this.textTTrans.TabIndex = 10;
-            this.textTTrans.Text = "*";
-            // 
-            // textTRes
-            // 
-            this.textTRes.AutoSize = true;
-            this.textTRes.Location = new System.Drawing.Point(157, 105);
-            this.textTRes.Name = "textTRes";
-            this.textTRes.Size = new System.Drawing.Size(12, 15);
-            this.textTRes.TabIndex = 11;
-            this.textTRes.Text = "*";
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -656,24 +611,6 @@ namespace Compilador
             this.textOperation.TabIndex = 8;
             this.textOperation.Text = "*";
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 60);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(71, 15);
-            this.label11.TabIndex = 14;
-            this.label11.Text = "T Ejecutado:";
-            // 
-            // textTExecuted
-            // 
-            this.textTExecuted.AutoSize = true;
-            this.textTExecuted.Location = new System.Drawing.Point(157, 60);
-            this.textTExecuted.Name = "textTExecuted";
-            this.textTExecuted.Size = new System.Drawing.Size(12, 15);
-            this.textTExecuted.TabIndex = 15;
-            this.textTExecuted.Text = "*";
-            // 
             // label17
             // 
             this.label17.AutoSize = true;
@@ -682,15 +619,6 @@ namespace Compilador
             this.label17.Size = new System.Drawing.Size(118, 15);
             this.label17.TabIndex = 12;
             this.label17.Text = "Tiempo Acumulado: ";
-            // 
-            // textAcum
-            // 
-            this.textAcum.AutoSize = true;
-            this.textAcum.Location = new System.Drawing.Point(157, 135);
-            this.textAcum.Name = "textAcum";
-            this.textAcum.Size = new System.Drawing.Size(12, 15);
-            this.textAcum.TabIndex = 13;
-            this.textAcum.Text = "*";
             // 
             // label5
             // 
@@ -701,6 +629,51 @@ namespace Compilador
             this.label5.TabIndex = 16;
             this.label5.Text = "Quantum:";
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(3, 105);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(98, 15);
+            this.label16.TabIndex = 5;
+            this.label16.Text = "Tiempo Restante:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(3, 90);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(118, 15);
+            this.label15.TabIndex = 4;
+            this.label15.Text = "Tiempo Transcurrido:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(3, 75);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(93, 15);
+            this.label14.TabIndex = 3;
+            this.label14.Text = "Tiempo Maxino:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 60);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(71, 15);
+            this.label11.TabIndex = 14;
+            this.label11.Text = "T Ejecutado:";
+            // 
+            // textAcum
+            // 
+            this.textAcum.AutoSize = true;
+            this.textAcum.Location = new System.Drawing.Point(157, 135);
+            this.textAcum.Name = "textAcum";
+            this.textAcum.Size = new System.Drawing.Size(12, 15);
+            this.textAcum.TabIndex = 13;
+            this.textAcum.Text = "*";
+            // 
             // textQuantum
             // 
             this.textQuantum.AutoSize = true;
@@ -709,6 +682,78 @@ namespace Compilador
             this.textQuantum.Size = new System.Drawing.Size(12, 15);
             this.textQuantum.TabIndex = 17;
             this.textQuantum.Text = "*";
+            // 
+            // textTRes
+            // 
+            this.textTRes.AutoSize = true;
+            this.textTRes.Location = new System.Drawing.Point(157, 105);
+            this.textTRes.Name = "textTRes";
+            this.textTRes.Size = new System.Drawing.Size(12, 15);
+            this.textTRes.TabIndex = 11;
+            this.textTRes.Text = "*";
+            // 
+            // textTTrans
+            // 
+            this.textTTrans.AutoSize = true;
+            this.textTTrans.Location = new System.Drawing.Point(157, 90);
+            this.textTTrans.Name = "textTTrans";
+            this.textTTrans.Size = new System.Drawing.Size(12, 15);
+            this.textTTrans.TabIndex = 10;
+            this.textTTrans.Text = "*";
+            // 
+            // textTMax
+            // 
+            this.textTMax.AutoSize = true;
+            this.textTMax.Location = new System.Drawing.Point(157, 75);
+            this.textTMax.Name = "textTMax";
+            this.textTMax.Size = new System.Drawing.Size(12, 15);
+            this.textTMax.TabIndex = 9;
+            this.textTMax.Text = "*";
+            // 
+            // textTExecuted
+            // 
+            this.textTExecuted.AutoSize = true;
+            this.textTExecuted.Location = new System.Drawing.Point(157, 60);
+            this.textTExecuted.Name = "textTExecuted";
+            this.textTExecuted.Size = new System.Drawing.Size(12, 15);
+            this.textTExecuted.TabIndex = 15;
+            this.textTExecuted.Text = "*";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(3, 30);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(58, 15);
+            this.label31.TabIndex = 18;
+            this.label31.Text = "Memoria:";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(3, 45);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(49, 15);
+            this.label34.TabIndex = 19;
+            this.label34.Text = "Marcos:";
+            // 
+            // textMem
+            // 
+            this.textMem.AutoSize = true;
+            this.textMem.Location = new System.Drawing.Point(157, 30);
+            this.textMem.Name = "textMem";
+            this.textMem.Size = new System.Drawing.Size(12, 15);
+            this.textMem.TabIndex = 20;
+            this.textMem.Text = "*";
+            // 
+            // textMarcos
+            // 
+            this.textMarcos.AutoSize = true;
+            this.textMarcos.Location = new System.Drawing.Point(157, 45);
+            this.textMarcos.Name = "textMarcos";
+            this.textMarcos.Size = new System.Drawing.Size(12, 15);
+            this.textMarcos.TabIndex = 21;
+            this.textMarcos.Text = "*";
             // 
             // label10
             // 
@@ -746,11 +791,12 @@ namespace Compilador
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
-            this.blockedT});
+            this.blockedT,
+            this.tamB});
             this.tableBlock.Location = new System.Drawing.Point(3, 29);
             this.tableBlock.Name = "tableBlock";
             this.tableBlock.RowTemplate.Height = 25;
-            this.tableBlock.Size = new System.Drawing.Size(524, 170);
+            this.tableBlock.Size = new System.Drawing.Size(276, 170);
             this.tableBlock.TabIndex = 3;
             // 
             // dataGridViewTextBoxColumn1
@@ -760,7 +806,7 @@ namespace Compilador
             // 
             // dataGridViewTextBoxColumn2
             // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "T Max";
+            this.dataGridViewTextBoxColumn2.HeaderText = "TMax";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
             // dataGridViewTextBoxColumn3
@@ -778,6 +824,11 @@ namespace Compilador
             this.blockedT.HeaderText = "Bloqueado";
             this.blockedT.Name = "blockedT";
             // 
+            // tamB
+            // 
+            this.tamB.HeaderText = "Tamaño";
+            this.tamB.Name = "tamB";
+            // 
             // label22
             // 
             this.label22.AutoSize = true;
@@ -792,12 +843,67 @@ namespace Compilador
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.label37);
+            this.panel4.Controls.Add(this.tableSusp);
             this.panel4.Controls.Add(this.tableBlock);
             this.panel4.Controls.Add(this.label22);
             this.panel4.Location = new System.Drawing.Point(8, 420);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(534, 207);
             this.panel4.TabIndex = 5;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label37.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.label37.Location = new System.Drawing.Point(285, 10);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(71, 15);
+            this.label37.TabIndex = 5;
+            this.label37.Text = "Suspendido";
+            // 
+            // tableSusp
+            // 
+            this.tableSusp.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.tableSusp.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.tableSusp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tableSusp.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn18,
+            this.dataGridViewTextBoxColumn19,
+            this.dataGridViewTextBoxColumn20,
+            this.dataGridViewTextBoxColumn23,
+            this.marcosS});
+            this.tableSusp.Location = new System.Drawing.Point(285, 29);
+            this.tableSusp.Name = "tableSusp";
+            this.tableSusp.RowTemplate.Height = 25;
+            this.tableSusp.Size = new System.Drawing.Size(242, 170);
+            this.tableSusp.TabIndex = 4;
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            this.dataGridViewTextBoxColumn18.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            this.dataGridViewTextBoxColumn19.HeaderText = "TMax";
+            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            this.dataGridViewTextBoxColumn20.HeaderText = "TTransc.";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            // 
+            // dataGridViewTextBoxColumn23
+            // 
+            this.dataGridViewTextBoxColumn23.HeaderText = "Tamaño";
+            this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
+            // 
+            // marcosS
+            // 
+            this.marcosS.HeaderText = "Marcos";
+            this.marcosS.Name = "marcosS";
             // 
             // tabOutputs
             // 
@@ -1225,7 +1331,7 @@ namespace Compilador
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.BackColor = System.Drawing.SystemColors.Highlight;
+            this.label28.BackColor = System.Drawing.Color.DodgerBlue;
             this.label28.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label28.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label28.ForeColor = System.Drawing.SystemColors.Control;
@@ -1239,7 +1345,7 @@ namespace Compilador
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.BackColor = System.Drawing.SystemColors.Highlight;
+            this.label25.BackColor = System.Drawing.Color.DodgerBlue;
             this.label25.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label25.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label25.ForeColor = System.Drawing.SystemColors.Control;
@@ -1253,7 +1359,7 @@ namespace Compilador
             // label165
             // 
             this.label165.AutoSize = true;
-            this.label165.BackColor = System.Drawing.SystemColors.Highlight;
+            this.label165.BackColor = System.Drawing.Color.DodgerBlue;
             this.label165.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label165.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label165.ForeColor = System.Drawing.SystemColors.Control;
@@ -1267,7 +1373,7 @@ namespace Compilador
             // label164
             // 
             this.label164.AutoSize = true;
-            this.label164.BackColor = System.Drawing.SystemColors.Highlight;
+            this.label164.BackColor = System.Drawing.Color.DodgerBlue;
             this.label164.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label164.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label164.ForeColor = System.Drawing.SystemColors.Control;
@@ -1281,7 +1387,7 @@ namespace Compilador
             // label162
             // 
             this.label162.AutoSize = true;
-            this.label162.BackColor = System.Drawing.SystemColors.Highlight;
+            this.label162.BackColor = System.Drawing.Color.DodgerBlue;
             this.label162.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label162.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label162.ForeColor = System.Drawing.SystemColors.Control;
@@ -1295,7 +1401,7 @@ namespace Compilador
             // label161
             // 
             this.label161.AutoSize = true;
-            this.label161.BackColor = System.Drawing.SystemColors.Highlight;
+            this.label161.BackColor = System.Drawing.Color.DodgerBlue;
             this.label161.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label161.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label161.ForeColor = System.Drawing.SystemColors.Control;
@@ -1309,7 +1415,7 @@ namespace Compilador
             // label159
             // 
             this.label159.AutoSize = true;
-            this.label159.BackColor = System.Drawing.SystemColors.Highlight;
+            this.label159.BackColor = System.Drawing.Color.DodgerBlue;
             this.label159.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label159.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label159.ForeColor = System.Drawing.SystemColors.Control;
@@ -1323,7 +1429,7 @@ namespace Compilador
             // label158
             // 
             this.label158.AutoSize = true;
-            this.label158.BackColor = System.Drawing.SystemColors.Highlight;
+            this.label158.BackColor = System.Drawing.Color.DodgerBlue;
             this.label158.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label158.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label158.ForeColor = System.Drawing.SystemColors.Control;
@@ -2828,42 +2934,6 @@ namespace Compilador
             this.progressBar50.TabIndex = 200;
             this.progressBar50.Value = 100;
             // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(3, 30);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(58, 15);
-            this.label31.TabIndex = 18;
-            this.label31.Text = "Memoria:";
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(3, 45);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(49, 15);
-            this.label34.TabIndex = 19;
-            this.label34.Text = "Marcos:";
-            // 
-            // textMem
-            // 
-            this.textMem.AutoSize = true;
-            this.textMem.Location = new System.Drawing.Point(157, 30);
-            this.textMem.Name = "textMem";
-            this.textMem.Size = new System.Drawing.Size(12, 15);
-            this.textMem.TabIndex = 20;
-            this.textMem.Text = "*";
-            // 
-            // textMarcos
-            // 
-            this.textMarcos.AutoSize = true;
-            this.textMarcos.Location = new System.Drawing.Point(157, 45);
-            this.textMarcos.Name = "textMarcos";
-            this.textMarcos.Size = new System.Drawing.Size(12, 15);
-            this.textMarcos.TabIndex = 21;
-            this.textMarcos.Text = "*";
-            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -2889,6 +2959,7 @@ namespace Compilador
             ((System.ComponentModel.ISupportInitialize)(this.tableBlock)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tableSusp)).EndInit();
             this.tabOutputs.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -2935,11 +3006,6 @@ namespace Compilador
         private System.Windows.Forms.Timer timerBlock;
         private System.Windows.Forms.Label textNuevos;
         private System.Windows.Forms.DataGridView tableBlock;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn blockedT;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView tableNews;
@@ -3145,6 +3211,19 @@ namespace Compilador
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.Label textMem;
         private System.Windows.Forms.Label textMarcos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn blockedT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tamB;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.DataGridView tableSusp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
+        private System.Windows.Forms.DataGridViewTextBoxColumn marcosS;
     }
 }
 
